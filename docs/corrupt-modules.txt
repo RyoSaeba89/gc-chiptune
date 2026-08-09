@@ -1,0 +1,67 @@
+Refused or silent modules - GC-Chiptune corpus
+libxmp backend (depackers excluded, ProWizard active)
+
+Out of 5112 modules tested, 11 refusals and 1 silent, i.e. 0.23 %.
+Every refusal is XMP_ERROR_LOAD: the header is valid but the body of the
+file is damaged. This is not a missing component - libxmp would have
+answered XMP_ERROR_DEPACK for a packed module.
+
+==============================================================================
+
+ 1. KEYGENMUSiC\!Others\DraCooLa - WinRAR 3.40 AV Multilanguage crk.xm
+    12445 bytes | reason: corrupt module | header: Extended Module: 
+
+ 2. KEYGENMUSiC\!Others\Mohsen3800 - WinRAR 3.61 Persian crk.xm
+    14445 bytes | reason: corrupt module | header: Extended Module: 
+
+ 3. KEYGENMUSiC\AT4RE\AT4RE - Inbox Backup for Facebook crk.xm
+    36075 bytes | reason: corrupt module | header: Extended Module: 
+
+ 4. KEYGENMUSiC\AT4RE\AT4RE - MakBit Virtual CD-DVD 1.3.0.0 serials.xm
+    102400 bytes | reason: corrupt module | header: Extended Module: 
+
+ 5. KEYGENMUSiC\AT4RE\AT4RE - Multi Password Recovery 1.0.5 crk.xm
+    302228 bytes | reason: corrupt module | header: Extended Module: 
+
+ 6. KEYGENMUSiC\MTCT\MTCT - CD Menu Studio 3.xx kg.xm
+    652860 bytes | reason: corrupt module | header: Extended Module: 
+
+ 7. KEYGENMUSiC\SnD\SnD - DeskSoft EarthView 3.6.x crk.xm
+    29999 bytes | reason: corrupt module | header: Extended Module: 
+
+ 8. KEYGENMUSiC\SnD\SnD - Net Meter 3.3b327 crk.xm
+    72642 bytes | reason: corrupt module | header: Extended Module: 
+
+ 9. KEYGENMUSiC\TFT\TFT - LEGO Chick Boutique crk.xm
+    55776 bytes | reason: corrupt module | header: Extended Module: 
+
+10. KEYGENMUSiC\tPORt\tPORt - Cistone Media Burner 2.3 crk.xm
+    43037 bytes | reason: corrupt module | header: Extended Module: 
+
+11. Ryo\Vol 1 - KeygenMusic\tPORt - Cistone Media Burner 2.3 crk.xm
+    43037 bytes | reason: corrupt module | header: Extended Module: 
+
+==============================================================================
+
+SILENT (loads and plays, but produces no sound):
+    KEYGENMUSiC\Under SEH\Under SEH - Throttle 6.5.11.2009e crk.s3m
+
+==============================================================================
+
+RE-CHECKED against ".\KEYGENMUSiC MusicPack"
+
+All 12 files (11 refusals + 1 silent) exist in the MusicPack, at the same
+relative paths and with the SAME md5 as in the other corpus. Re-run through
+the backend: 11 refusals, 1 silent - result unchanged.
+Conclusion: the MusicPack brings no healthy version, the files are damaged
+at the source. Do not re-test.
+
+The MusicPack is otherwise a SUPERSET of the other corpus: 5533 files
+against 5078, i.e. 456 more. Those 456 additions are formats foreign to our
+backends:
+    120 sc68   63 ahx   48 sid   41 ogg   32 sap   21 ym   20 wav
+     18 hsc    17 amd   16 fc14  15 mp3   13 rad   10 d00   5 nsf
+      5 mo3     4 fc13   4 bp     3 spc    1 mtm
+Run through the bench: 455 "format not recognised", only the .mtm plays
+(x833 real time). Supporting them would require other libraries (sc68,
+sidplay, adplug for hsc/amd/rad/d00) - out of current scope.

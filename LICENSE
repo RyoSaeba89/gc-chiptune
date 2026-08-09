@@ -1,0 +1,64 @@
+GC-Chiptune
+===========
+
+The code in this repository AND the built `.dol` are under the MIT licence
+(below).
+
+The TimGM6mb soundfont, distributed **alongside** the binary in the release,
+remains under **GPL-2.0**. They are two separate works on the same medium: the
+player reads a data file at start-up, it does not derive from it. Each therefore
+keeps its own licence.
+
+That was not true for a while: the soundfont was **embedded in the `.dol`**,
+which made it a single work and imposed GPL-2.0 on the whole binary. It was
+taken back out — for memory first (5.7 MB permanently out of the console's 24,
+see docs/STATUS.md §12.20), and the licence followed.
+
+Redistributing the soundfont requires providing its source: that is the purpose
+of `soundfont-source-TimGM6mb.sf2` in the release, and of
+`extern/soundfont/TimGM6mb.sf2` here — the only file in `extern/` that is
+versioned, and for exactly that reason.
+
+Replacing TimGM6mb with MuseScore's `MS Basic` (MIT) would make the release
+entirely permissive, binary and data.
+
+
+THIRD-PARTY COMPONENTS
+----------------------
+
+  libogc2, libfat                        see their repositories
+  libxmp                                 LGPL-2.1-or-later
+  TinySoundFont, TinyMidiLoader          MIT
+  GRRLIB                                 MIT
+  FreeType                               FTL or GPL-2-or-later
+  libpng, zlib, brotli, bzip2            permissive
+  DejaVu Sans Condensed (embedded)       Bitstream Vera + Arev, permissive
+  TimGM6mb.sf2 (Tim Brechbill)           GPL-2.0, separate file
+
+On TimGM6mb: its author states that he created some of the samples himself, the
+others being "either in the public domain or under the GPL". That provenance
+remains a declaration.
+
+
+MIT LICENCE
+-----------
+
+Copyright (c) 2026 ryosaeba89
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

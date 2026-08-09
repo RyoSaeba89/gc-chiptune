@@ -1,0 +1,63 @@
+# --- third-party code, rebuilt by tools/bootstrap.sh ------------------------
+# extern/ must stay strictly pristine: we do not version it, we re-clone it at
+# the pinned commits. Two exceptions, which have no repository to clone from and
+# are required to build:
+extern/*
+!extern/tsf/
+!extern/soundfont/
+
+# --- bulky corpora and tools, specific to the machine -----------------------
+# Chiptunes/  : ~750 MB, the personal test corpus
+# Dolphin-x64/: ~420 MB, portable Dolphin (version tested: 2606)
+#
+# The leading / is NOT decorative: without it a gitignore pattern applies at
+# every level, and on Windows case is ignored -- so "Chiptunes/" made
+# test/chiptunes/, the test set, disappear.
+/Chiptunes/
+/KEYGENMUSiC MusicPack/
+# The culled pack, the one that goes onto the card -- 738 MB, plus its archive.
+# Without these two lines, an absent-minded "git add -A" takes the whole corpus
+# with it.
+/KEYGENMUSiC MusicPack GC Edition/
+/KEYGENMUSiC MusicPack GC Edition.7z
+# What the cull set aside (docs/pack-dropped.txt). Moved, not deleted -- but it
+# has no business in the repository either.
+/Pack-rebut/
+/Dolphin-x64/
+
+# --- build products ---------------------------------------------------------
+build-gc/
+build-host/
+
+# Leftovers from a libxmp build launched from the root: the objects landed here
+# instead of build-host/libxmp/. Harmless, but useless.
+/*.o
+
+*.exe
+*.a
+*.elf
+*.dol
+*.map
+# ... except the test set's .dol, which must be ready to use:
+!test/gc-chiptune.dol
+
+# --- the study journal, deliberately not published --------------------------
+# docs/STATUS.md is the chronological account of the whole investigation: every
+# fault found, every measurement, every decision reversed. It is written for
+# whoever maintains this, not for whoever uses it, and it stays on the machine.
+#
+# The source comments and the other documents cite its sections by number
+# (§13, §12.20, §20...). Those citations are left as they are: they are worth
+# something to the maintainer, who has the file, and they cost a reader nothing
+# -- README says where they point. What must NOT happen is a markdown LINK to
+# it, which would 404 in the published tree.
+#
+# ⚠️ Ignoring it here does not remove it from a history that already contains
+# it. The 1.0.0 tree was published as a single fresh commit for exactly that
+# reason; the previous history is on the local branch pre-1.0.0-history.
+docs/STATUS.md
+
+# --- misc -------------------------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
