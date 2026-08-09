@@ -45,16 +45,20 @@ recursively.
 
 ## Install
 
-Three files, and nothing to convert except the soundfont — which the release
-ships already converted.
+Download the release archive. **Nothing to convert, nothing to prepare** — the
+soundfont in it is ready to use.
 
 | what | where |
 |---|---|
 | `gc-chiptune.dol` | anywhere; loaded by Swiss, SD Media Launcher, GC Loader, a modchip |
-| `soundfont.sf2` | **next to the `.dol`**. Without it `.mid` files are skipped; modules play regardless |
+| `soundfont.sf2` | **next to the `.dol`**, as it is. Without it `.mid` files are skipped; modules play regardless |
 | your music | `sd:/chiptunes`, `sd:/GC-Chiptune`, `sd:/music`, or the root — sub-folders allowed |
 
 Modules and MIDI files are copied **as they are**.
+
+> The archive also holds `gpl-source/TimGM6mb.sf2`. **That one is not for the
+> card** — it is the unconverted original, present only because GPL-2.0 requires
+> the source to travel with the binary. The player refuses it and says so.
 
 The player writes two files next to the music: `gc-chiptune.idx` (the index and
 the durations — without it the first start-up walks the card again, 4.5 s for
@@ -104,17 +108,23 @@ like.
 
 ## Two rules you cannot work around
 
-**1. The soundfont must be prepared offline.** The Gekko is big-endian; the
-`.sf2` is little-endian and TinySoundFont reads it by raw pointer copy. Copying
-the original soundfont onto the card does not work. Modules and MIDI files, on
-the other hand, are copied as they are.
+**1. A soundfont has to be prepared offline — and the one you are given already
+is.** The Gekko is big-endian, the `.sf2` format is little-endian, and
+TinySoundFont reads the RIFF container by raw pointer copy: a stock soundfont
+cannot work here. So the release ships it **already converted**. Copy it as it
+is; you have nothing to run.
+
+This only becomes your problem if you insist on a *different* bank — and there
+is no reason to. If you do, `tools/sf2_prep` converts one:
 
 ```powershell
-.\tools\make-sdcard.ps1 -Source Chiptunes    # converts what needs it, drops the rest
+.\build-host\sf2_prep.exe your-bank.sf2 soundfont.sf2   # one other bank
+.\tools\make-sdcard.ps1 -Source Chiptunes               # or a whole card at once
 ```
 
 The player detects an unprepared soundfont and says so ("soundfont not
-prepared") instead of failing with no explanation.
+prepared") instead of failing with no explanation. Modules and MIDI files, on
+the other hand, are always copied as they are.
 
 **2. `extern/` stays strictly pristine.** No patch is applied there, so an
 upstream update requires nothing to be reapplied.
@@ -193,7 +203,8 @@ licence followed.
 
 Redistributing the soundfont requires providing its source: hence
 `extern/soundfont/TimGM6mb.sf2`, the only file of `extern/` that is versioned
-here, and `soundfont-source-TimGM6mb.sf2` in the release.
+here, and `gpl-source/TimGM6mb.sf2` in the release archive — kept in a
+sub-folder so it cannot be mistaken for the one to copy.
 
 | component | licence |
 |---|---|
@@ -207,6 +218,8 @@ here, and `soundfont-source-TimGM6mb.sf2` in the release.
 | DejaVu Sans Condensed | Bitstream Vera + Arev |
 | **TimGM6mb.sf2** | **GPL-2.0** — separate file |
 
-Everything else being permissive, replacing TimGM6mb with MuseScore's `MS Basic`
-(MIT) would make the release entirely permissive, binary **and** data. See
+Everything else being permissive, swapping TimGM6mb for MuseScore's `MS Basic`
+(MIT) would make the release entirely permissive, binary **and** data. That is a
+change to make **here**, in a future release, so that users keep getting a
+soundfont that just works — not something to hand to them as homework. See
 §12.20 of `docs/STATUS.md`.
